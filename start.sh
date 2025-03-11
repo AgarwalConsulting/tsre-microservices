@@ -3,7 +3,7 @@
 echo "Starting..."
 ## Start Minikube
 echo "> Creation of Minikube"
-minikube start --cpus=6 --memory 16384 --mount --mount-string="/proc:/host/proc"
+minikube start --cpus=5 --memory 7937 --mount --mount-string="/proc:/host/proc"
 kubectl create secret generic datadog-secret --from-literal=api-key=$DD_API_KEY --from-literal=app-key=$DD_APP_KEY
 
 ## Reconfigure agent
@@ -29,7 +29,7 @@ kubectl apply -f kubernetes-manifests/redis.yaml
 kubectl apply -f kubernetes-manifests/shippingservice.yaml
 
 # Skaffold build and run
-## Loop until 17 pods are up 
+## Loop until 17 pods are up
 until [[ $(kubectl get pods | awk 'END{print NR}') -gt 17 ]]; do skaffold run --platform=linux/amd64; done
 
 echo "> Configuring extras"

@@ -12,4 +12,4 @@ echo "> Configuring extras"
 export AGENT_POD=$(kubectl get pods | sed -e '/datadog-agent/!d' | sed -n '/cluster/!p' | sed -n '/metrics/!p' | awk -F' ' '{print $1}')
 # Configure nginx
 export FRONTEND_LB=$(minikube service frontend-lb --url)
-sudo -E ./ctf/microservices/conf_nginx.sh
+./ctf/microservices/conf_nginx.sh
